@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const exitButton = document.getElementById('exit-button');
     const mapContainer = document.getElementById('map-container');
     const viewResultButton = document.getElementById('view-result-button');
-        
+
     let cemeteryCoordinates = { lat: 0, lng: 0 };
 
     const showResults = () => {
@@ -49,44 +49,79 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const updateDeceasedInfo = (photo, name) => {
-        if (photo) {
-            deceasedPhotoResult.src = photo;
-            deceasedPhotoResult.alt = `Foto de ${name}`;
-            deceasedPhotoResult.style.display = 'block';
-        } else {
-            // Se não houver foto, exibir imagem padrão (falecido.png)
-            deceasedPhotoResult.src = 'imagens/falecido.jpg';
-            deceasedPhotoResult.alt = 'Foto de Falecido';
-            deceasedPhotoResult.style.display = 'block';
-        }
-
+        const deceasedPhotoPath = photo ? `imagens/${photo}` : 'imagens/falecido.jpg';
+    
+        deceasedPhotoResult.src = deceasedPhotoPath;
+        deceasedPhotoResult.alt = photo ? `Foto de ${name}` : 'Foto de Falecido';
+        deceasedPhotoResult.style.display = 'block';
+    
         deceasedNameResult.textContent = name;
         deceasedInfo.style.display = 'block';
     };
-
+    
     const updateCemeteryImage = (image) => {
-        if (image) {
-            cemeteryImageResult.src = image;
-            cemeteryImageResult.alt = 'Fachada do Cemitério';
-            cemeteryImageResult.style.display = 'block';
+        const cemeteryImagePath = image ? `imagens/${image}` : 'imagens/cemitério.jpg';
+    
+        cemeteryImageResult.src = cemeteryImagePath;
+        cemeteryImageResult.alt = 'Fachada do Cemitério';
+        cemeteryImageResult.style.display = 'block';
+    };
+    
+    const handleSearchButtonClick = async () => {
+        const cemeteryName = form.cemeteryName.value;
+        const deceasedName = form.deceasedName.value;
+    
+        // Simular busca de coordenadas do cemitério (substituir com lógica real)
+        cemeteryCoordinates = { lat: -23.550520, lng: -46.633308 };
+    
+        showResults();
+        updateResultMessage(cemeteryName, deceasedName);
+        createMap();
+    
+        // Simular resultado positivo ou negativo
+        const hasResult = Math.random() < 0.5; // 50% de chance de ter um resultado
+    
+        if (hasResult) {
+            // Resultado positivo
+            updateCemeteryName(cemeteryName);
+    
+            // Verifique se a foto do falecido existe no banco de dados, caso contrário, use uma imagem padrão
+            const deceasedPhoto = 'caminho/para/foto.jpg'; // Substitua pelo caminho real no banco de dados
+            const deceasedImageExists = /* Lógica para verificar se a imagem existe no banco de dados */ true;
+    
+            if (deceasedImageExists) {
+                updateDeceasedInfo(deceasedPhoto, deceasedName);
+            } else {
+                updateDeceasedInfo(null, 'Não encontrado');
+            }
+    
+            // Verifique se a imagem do cemitério existe no banco de dados, caso contrário, use uma imagem padrão
+            const cemeteryImage = 'caminho/para/fachada.jpg'; // Substitua pelo caminho real no banco de dados
+            const cemeteryImageExists = /* Lógica para verificar se a imagem existe no banco de dados */ true;
+    
+            if (cemeteryImageExists) {
+                updateCemeteryImage(cemeteryImage);
+            } else {
+                updateCemeteryImage(null);
+            }
         } else {
-            // Se não houver imagem, exibir imagem padrão (cemiterio.png)
-            cemeteryImageResult.src = 'imagens/cemitério.jpg';
-            cemeteryImageResult.alt = 'Fachada do Cemitério';
-            cemeteryImageResult.style.display = 'block';
+            // Resultado negativo
+            updateCemeteryName('Não encontrado');
+            updateDeceasedInfo(null, 'Não encontrado');
+            updateCemeteryImage(null);
         }
     };
 
     const sendCondolences = () => {
         // Adicione lógica para enviar condolências (por exemplo, redirecionar para uma página de confirmação)
-        window.location.href = "confirmation.html";
+        window.location.href = "condolences.html";
     };
-    
+
     const viewCemeteryInfo = () => {
         // Adicione lógica para visualizar informações do cemitério
         window.location.href = "cemetery-info.html";
     };
-    
+
     const goBack = () => {
         // Adicione lógica para voltar à página anterior
         window.history.back();
@@ -140,16 +175,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Adicione lógica para redirecionar para a página com mais informações
         window.location.href = "more-info.html";
     };
-    
+
     const redirectToResult = () => {
         // Adicione lógica para redirecionar para a página de resultado
         window.location.href = "result.html";
     };
 
-
-
-
-    
     const handleBackButtonClick = () => {
         hideResults();
     };
@@ -191,26 +222,5 @@ document.addEventListener('DOMContentLoaded', () => {
     backButton.addEventListener('click', handleBackButtonClick);
     exitButton.addEventListener('click', handleExitButtonClick);
     viewResultButton.addEventListener('click', redirectToResult);
-    condolencesButton.addEventListener('click', redirectToCondolencesPage);
-    cemeteryInfoButton.addEventListener('click', redirectToCemeteryInfoPage);
-    moreInfoButton.addEventListener('click', redirectToMoreInfoPage);
     // Adicione mais event listeners conforme necessário
 });
-
-    // Evento de clique no botão de busca no index.html
-    form.addEventListener('submit', (event) => {
-        event.preventDefault(); // Evitar o comportamento padrão do formulário
-
-        // Lógica de busca, se necessário...
-
-        // Redirecionar para a página search.html
-        window.location.href = "search.html";
-    });
-
-    // Evento de clique no botão "Ver Resultado" no search.html
-    viewResultButton.addEventListener('click', () => {
-        // Lógica de preparação para a exibição do resultado, se necessário...
-
-        // Redirecionar para a página result.html
-        window.location.href = "result.html";
-    });
