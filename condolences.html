@@ -21,14 +21,14 @@
                 
         <!-- Exibição da foto do falecido e nome -->
         <div id="deceasedInfo" class="result-section">
-            <img id="deceasedPhotoResult" alt="Foto do Falecido" class="result-photo">
+            <img id="deceasedPhotoResult" src="imagens/falecido.jpg" alt="Foto do Falecido" class="result-photo">
             <h3 id="deceasedNameResult" class="result-text"></h3>
         </div>
 
         <!-- Espaço para escrever mensagem de condolências -->
         <form id="condolences-form">
             <label for="message">Escreva sua mensagem de condolências:</label>
-            <textarea id="message" rows="4" cols="50" required></textarea>
+            <textarea id="message" rows="20" cols="80" required></textarea>
             <!-- Botões -->
         <div>
                 <button type="submit" onclick="sendCondolences()">Enviar</button>

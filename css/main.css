@@ -173,17 +173,18 @@ li {
     justify-content: space-between;
 }
 
-/*.logo {
-    max-width: 100px;
-}*/
 
-/* Adicionando bordas arredondadas ao logo */
+/* Adicionando bordas arredondadas ao logo e redimencionar*/
 .logo img {
     border-radius: 30px;
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 /* Centralizando o logo verticalmente no header */
 .logo {
+    margin: auto;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
