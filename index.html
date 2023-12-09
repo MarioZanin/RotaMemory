@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Rota das Memórias</title>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="imagens/Logo.JPG" alt="Logo Rota das Memórias">
+        </div>
+        <h1>Rota das Memórias</h1>
+        <button onclick="logout()">Sair</button>
+    </header>
+
+    <main>
+        <h1>Consulta a Cemitérios</h1>
+    </main>
+    <aside class="container">
+        <div class="search-options">
+            <form id="search-form">
+                <div>
+                    <label for="deceasedName">Nome do Falecido:</label>
+                    <input type="text" id="deceasedName" size="30" maxlength="30" required placeholder="*Obrigatório">
+                </div>
+
+                <div>
+                    <label for="cemeteryName">Nome do Cemitério:</label>
+                    <input type="text" id="cemeteryName" size="30" maxlength="30" required placeholder="*Obrigatório">
+                </div>
+
+                <div>
+                    <label for="deathDate">Data de Falecimento:</label>
+                    <input type="date" id="deathDate"size="30">
+                </div>
+
+                <button type="button" id="search-button" onclick="search()">Buscar</button>
+            </form>
+        </div>
+    </aside>
+    <script src="script.js"></script>
+</body>
+</html>
